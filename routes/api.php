@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('1')
@@ -10,9 +11,6 @@ Route::prefix('1')
         ->as('nyt.')
         ->group(function (): void {
 
-            Route::get('/best-sellers', function () {
-                return view('welcome');
-            })->name('best-sellers');
-
+            Route::get('/best-sellers', [BookController::class, 'bestSellers'])->name('best-sellers');
         });
 });
