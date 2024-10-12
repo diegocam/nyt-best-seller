@@ -3,6 +3,9 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -13,6 +16,20 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         //
     })
-    ->withExceptions(function (Exceptions $exceptions) {
-        //
+    ->withExceptions(function (Exceptions $exceptions): void {
+
+        $exceptions->render(function (ValidationException $e): JsonResponse {
+
+            $errors = [];
+
+            foreach ($e->errors() as $errorMessage) {
+                $errors[] = [
+                    "status" => Response::HTTP_UNPROCESSABLE_ENTITY,
+                    "title"  => "Validation Error",
+                    "detail" => $errorMessage,
+                ];
+            }
+
+            return response()->json(["errors" => $errors]);
+        });
     })->create();
