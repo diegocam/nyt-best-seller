@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BestSellerRequest;
+use App\Http\Resources\ResponseResource;
 use App\Services\ApiInterface;
 use App\Services\NewYorkTimesApi;
-use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -18,13 +18,13 @@ class BookController extends Controller
 
     public function bestSellers(BestSellerRequest $request)
     {
-        $params['author'] = $request->input('author');
-        $params['title'] = $request->input('title');
-        $params['isbns'] = $request->input('isbn');
-        $params['offset'] = $request->input('offset', 0);
+        $input['author'] = $request->input('author');
+        $input['title'] = $request->input('title');
+        $input['isbns'] = $request->input('isbn');
+        $input['offset'] = $request->input('offset', 0);
 
-        $response = $this->api->fetchData($params);
+        $response = $this->api->fetchData($input);
 
-        return $response;
+        return new ResponseResource($response);
     }
 }
