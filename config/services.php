@@ -37,6 +37,7 @@ return [
 
     'nyt' => [
         'key' => env('NEW_YORK_TIMES_API_KEY'),
+        'url' => env('NEW_YORK_TIMES_API_URL'),
     ]
 
 ];

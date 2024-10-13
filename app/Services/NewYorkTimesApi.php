@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\Http;
 
 class NewYorkTimesApi implements ApiInterface
 {
-    const URL = 'https://api.nytimes.com/svc/books/v3/lists/best-sellers/history.json';
-
     public function fetchData(array $params): array
     {
         $apiParams['api-key'] = config('services.nyt.key');
@@ -28,7 +26,7 @@ class NewYorkTimesApi implements ApiInterface
             $apiParams['offset'] = $params['offset'];
         }
 
-        $response = Http::get(self::URL, $apiParams);
+        $response = Http::get(config('services.nyt.url'), $apiParams);
 
         return $response->json();
     }
