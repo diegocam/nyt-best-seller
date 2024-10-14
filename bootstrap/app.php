@@ -31,6 +31,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 ];
             }
 
-            return response()->json(["errors" => $errors]);
+            return response()->json(["errors" => $errors], Response::HTTP_UNPROCESSABLE_ENTITY);
         });
     })->create();
