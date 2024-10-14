@@ -68,9 +68,9 @@ class NytEndpointTest extends TestCase
             ],
 
             'with isbn set to integer with less than 10 digits' => [
-                '/api/1/nyt/best-sellers?isbn[]=12345689',
+                '/api/1/nyt/best-sellers?isbn[]=12345',
                 422,
-                'The isbn.0 field must be between 10 and 13 digits.'
+                'The isbn.0 field must be either 10 or 13 digits.'
             ],
 
             'with isbn set to integer with 10 digits' => [
@@ -80,12 +80,14 @@ class NytEndpointTest extends TestCase
 
             'with isbn set to integer with 11 digits' => [
                 '/api/1/nyt/best-sellers?isbn[]=12345678901',
-                200,
+                422,
+                'The isbn.0 field must be either 10 or 13 digits.'
             ],
 
             'with isbn set to integer with 12 digits' => [
                 '/api/1/nyt/best-sellers?isbn[]=123456789012',
-                200,
+                422,
+                'The isbn.0 field must be either 10 or 13 digits.'
             ],
 
             'with isbn set to integer with 13 digits' => [
@@ -96,7 +98,7 @@ class NytEndpointTest extends TestCase
             'with isbn set to integer with more than 13 digits' => [
                 '/api/1/nyt/best-sellers?isbn[]=12345678901234',
                 422,
-                'The isbn.0 field must be between 10 and 13 digits.'
+                'The isbn.0 field must be either 10 or 13 digits.'
             ],
 
             'with isbn set to integer with multiple good isbns' => [

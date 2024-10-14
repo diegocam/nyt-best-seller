@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Isbn;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BestSellerRequest extends FormRequest
@@ -24,7 +25,7 @@ class BestSellerRequest extends FormRequest
         return [
             'author' => 'alpha',
             'isbn'   => 'array',
-            'isbn.*' => 'digits_between:10,13',
+            'isbn.*' => new Isbn,
             'title'  => 'string',
             'offset' => [
                 'numeric',
