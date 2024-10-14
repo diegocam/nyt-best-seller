@@ -132,7 +132,7 @@ class NytEndpointTest extends TestCase
             'with offset not set with multiple of 20' => [
                 '/api/1/nyt/best-sellers?offset=1',
                 422,
-                'The offset must be a multiple of 20.'
+                'The offset field must be a multiple of 20.'
             ],
 
             'with good offset' => [

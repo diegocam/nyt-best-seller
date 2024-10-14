@@ -35,7 +35,7 @@ class BestSellerRequest extends FormRequest
                 'min:0',
                 function ($attribute, $value, $fail) {
                     if (((int) $value) % 20 !== 0) {
-                        $fail('The ' . $attribute . ' must be a multiple of 20.');
+                        $fail('The ' . $attribute . ' field must be a multiple of 20.');
                     }
                 },
             ]
