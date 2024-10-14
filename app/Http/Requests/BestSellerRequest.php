@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\Isbn;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BestSellerRequest extends FormRequest
@@ -25,7 +24,11 @@ class BestSellerRequest extends FormRequest
         return [
             'author' => 'alpha',
             'isbn'   => 'array',
-            'isbn.*' => new Isbn,
+            'isbn.*' => function ($attribute, $value, $fail) {
+                if (!preg_match('/^(?:\d{10}|\d{13})$/', $value)) {
+                    $fail('The :attribute field must be either 10 or 13 digits.');
+                }
+            },
             'title'  => 'string',
             'offset' => [
                 'numeric',
