@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Exceptions\BadRequestException;
+use App\Exceptions\UnauthorizedException;
 use Illuminate\Support\Facades\Http;
 
 class NewYorkTimesApi implements ApiInterface
@@ -15,6 +17,14 @@ class NewYorkTimesApi implements ApiInterface
         $apiParams['api-key'] = config('services.nyt.key');
 
         $response = Http::get(config('services.nyt.url'), $apiParams);
+
+        if ($response->status() === 401) {
+            throw new UnauthorizedException();
+        }
+
+        if ($response->status() === 400) {
+            throw new BadRequestException();
+        }
 
         return $response->json();
     }
