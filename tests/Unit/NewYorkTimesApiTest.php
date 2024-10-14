@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit;
 
 use App\Services\NewYorkTimesApi;
@@ -26,28 +28,28 @@ class NewYorkTimesApiTest extends TestCase
     public static function nytDataConversionProvider(): array
     {
         return [
-            'with no data' => [
+            'with no data'            => [
                 [],
                 [],
             ],
 
-            'author with no value' => [
+            'author with no value'    => [
                 [
                     'author'
                 ],
                 [],
             ],
 
-            'author with value' => [
+            'author with value'       => [
                 [
-                    'author' => 'some'
+                    'author' => 'some',
                 ],
                 [
-                    'author' => 'some'
+                    'author' => 'some',
                 ],
             ],
 
-            'isbns with no value' => [
+            'isbns with no value'     => [
                 [
                     'isbns'
                 ],
@@ -56,26 +58,26 @@ class NewYorkTimesApiTest extends TestCase
 
             'isbns with string value' => [
                 [
-                    'isbns' => ''
+                    'isbns' => '',
                 ],
                 [],
             ],
 
-            'isbns with empty array' => [
+            'isbns with empty array'  => [
                 [
-                    'isbns' => []
+                    'isbns' => [],
                 ],
                 [],
             ],
 
-            'isbns with one element' => [
+            'isbns with one element'  => [
                 [
                     'isbns' => [
                         '1234567890'
-                    ]
+                    ],
                 ],
                 [
-                    'isbn' => '1234567890'
+                    'isbn' => '1234567890',
                 ],
             ],
 
@@ -84,42 +86,42 @@ class NewYorkTimesApiTest extends TestCase
                     'isbns' => [
                         '1234567890',
                         '1234567890123',
-                    ]
+                    ],
                 ],
                 [
                     'isbn' => '1234567890;1234567890123',
                 ],
             ],
 
-            'title with no value' => [
+            'title with no value'     => [
                 [
                     'title'
                 ],
                 [],
             ],
 
-            'title with value' => [
+            'title with value'        => [
                 [
-                    'title' => 'some'
+                    'title' => 'some',
                 ],
                 [
-                    'title' => 'some'
+                    'title' => 'some',
                 ],
             ],
 
-            'offset with no value' => [
+            'offset with no value'    => [
                 [
                     'offset'
                 ],
                 [],
             ],
 
-            'offset with value' => [
+            'offset with value'       => [
                 [
-                    'offset' => '0'
+                    'offset' => '0',
                 ],
                 [
-                    'offset' => '0'
+                    'offset' => '0',
                 ],
             ],
         ];

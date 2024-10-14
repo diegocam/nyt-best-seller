@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -16,8 +18,6 @@ class BestSellerRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
@@ -26,9 +26,9 @@ class BestSellerRequest extends FormRequest
             'isbn'   => 'array',
             'isbn.*' => [
                 'numeric',
-                function ($attribute, $value, $fail) {
+                function ($attribute, $value, $fail): void {
                     if (!preg_match('/^(?:\d{10}|\d{13})$/', $value)) {
-                        $fail('The :attribute field must be either 10 or 13 digits.');
+                        $fail("The $attribute field must be either 10 or 13 digits.");
                     }
                 },
             ],
@@ -36,12 +36,12 @@ class BestSellerRequest extends FormRequest
             'offset' => [
                 'numeric',
                 'min:0',
-                function ($attribute, $value, $fail) {
+                function ($attribute, $value, $fail): void {
                     if (((int) $value) % 20 !== 0) {
-                        $fail('The :attribute field must be a multiple of 20.');
+                        $fail("The $attribute field must be a multiple of 20.");
                     }
                 },
-            ]
+            ],
         ];
     }
 }
