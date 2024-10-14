@@ -24,11 +24,14 @@ class BestSellerRequest extends FormRequest
         return [
             'author' => 'alpha',
             'isbn'   => 'array',
-            'isbn.*' => function ($attribute, $value, $fail) {
-                if (!preg_match('/^(?:\d{10}|\d{13})$/', $value)) {
-                    $fail('The :attribute field must be either 10 or 13 digits.');
-                }
-            },
+            'isbn.*' => [
+                'numeric',
+                function ($attribute, $value, $fail) {
+                    if (!preg_match('/^(?:\d{10}|\d{13})$/', $value)) {
+                        $fail('The :attribute field must be either 10 or 13 digits.');
+                    }
+                },
+            ],
             'title'  => 'string',
             'offset' => [
                 'numeric',
