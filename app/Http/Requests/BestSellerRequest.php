@@ -22,16 +22,16 @@ class BestSellerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'author' => 'string',
+            'author' => 'alpha',
             'isbn'   => 'array',
             'isbn.*' => 'digits_between:10,13',
             'title'  => 'string',
             'offset' => [
-                'integer',
+                'numeric',
                 'min:0',
                 function ($attribute, $value, $fail) {
-                    if ($value % 20 !== 0) {
-                        $fail('The ' . $attribute . ' must be a multiple of 20');
+                    if (((int) $value) % 20 !== 0) {
+                        $fail('The ' . $attribute . ' must be a multiple of 20.');
                     }
                 },
             ]
