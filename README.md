@@ -26,13 +26,13 @@ You need to create your own API credentials to access the NYT API.
    NEW_YORK_TIMES_API_KEY="YOUR-API-KEY-HERE"
    ```
 3. Run `composer install`
-4. Run the app with `php artisan serve`. You would see something like:
+4. Start the app with `php artisan serve`. You should see something like this come up:
    ```sh
     INFO  Server running on [http://127.0.0.1:8000].
 
     Press Ctrl+C to stop the server
     ```
-5. Go to the URL: http://127.0.0.1:8000/api/1/nyt/best-sellers to hit our endpoint
+5. Go to the URL: http://127.0.0.1:8000/api/1/nyt/best-sellers to hit our endpoint.
 
 ### Testing
 Run `php artisan test`
